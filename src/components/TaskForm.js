@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function TaskForm(props) {
-	const [input, setInput] = useState("");
+	const [input, setInput] = useState(props.edit ? props.edit.value : "");
+
+	const inputFocus = useRef(null);
+
+	useEffect(() => {
+		inputFocus.current.focus();
+	});
 
 	const handleOnChange = (e) => {
 		setInput(e.target.value);
@@ -18,15 +24,33 @@ function TaskForm(props) {
 	};
 	return (
 		<form className='task-form' onSubmit={handleSubmit}>
-			<input
-				type='text'
-				placeholder='Add a task'
-				value={input}
-				name='text'
-				className='task-input'
-				onChange={handleOnChange}
-			/>
-			<button className='task-button'>Add task</button>
+			{props.edit ? (
+				<>
+					<input
+						type='text'
+						placeholder='Update'
+						value={input}
+						name='text'
+						className='task-input edit'
+						onChange={handleOnChange}
+						ref={inputFocus}
+					/>
+					<button className='task-button edit'>Update</button>
+				</>
+			) : (
+				<>
+					<input
+						type='text'
+						placeholder='Add a task'
+						value={input}
+						name='text'
+						className='task-input'
+						onChange={handleOnChange}
+						ref={inputFocus}
+					/>
+					<button className='task-button'>Add task</button>
+				</>
+			)}
 		</form>
 	);
 }

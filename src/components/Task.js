@@ -26,7 +26,7 @@ function Task({ tasks, completeTask, removeTask, updateTask }) {
 			key={index}
 		>
 			<div key={task.id} onClick={() => completeTask(task.id)}>
-				{task.tex}
+				{task.text}
 			</div>
 			<div className='icons'>
 				<RiCloseCircleLine
