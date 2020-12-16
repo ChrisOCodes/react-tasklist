@@ -39,7 +39,7 @@ function TaskList() {
 	};
 	return (
 		<div>
-			<h1>Placeholder</h1>
+			<h1>Task List</h1>
 			<TaskForm onSubmit={addTask} />
 			<Task
 				tasks={tasks}
